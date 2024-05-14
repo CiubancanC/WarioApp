@@ -1,13 +1,24 @@
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
+  IonContent,
   IonIcon,
+  IonItemDivider,
   IonLabel,
+  IonList,
+  IonMenu,
+  IonMenuToggle,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
   setupIonicReact,
+  IonHeader,
+  IonToolbar,
+  IonButtons,
+  IonMenuButton,
+  IonButton,
+  IonTitle,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { ellipse, square, triangle } from "ionicons/icons";
@@ -43,23 +54,55 @@ import "@ionic/react/css/palettes/dark.system.css";
 
 /* Theme variables */
 import "./theme/variables.css";
+import PageWrapper from "./components/PageWrapper";
 
 setupIonicReact();
 
+const AppHeader: React.FC<{ title: string }> = ({ title }) => (
+  <IonHeader>
+    <IonToolbar>
+      <IonButtons slot="start">
+        <IonMenuButton />
+      </IonButtons>
+      <IonTitle>{title}</IonTitle>
+      <IonButtons slot="end">
+        <IonButton
+          onClick={() => {
+            /* Do nothing */
+          }}
+        >
+          Button
+        </IonButton>
+      </IonButtons>
+    </IonToolbar>
+  </IonHeader>
+);
+
 const App: React.FC = () => (
   <IonApp>
+    <IonMenu side="start" contentId="main-content">
+      <IonContent>
+        <IonList>
+          <IonItemDivider>Menu</IonItemDivider>
+          <IonMenuToggle>
+            <IonButton>Item 1</IonButton>
+            <IonButton>Item 2</IonButton>
+          </IonMenuToggle>
+        </IonList>
+      </IonContent>
+    </IonMenu>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/">
-            <Chat />
+            <AppHeader title="Chat" />
+            {/* We need to wrap our page in order to have reusable navigation that's also custom. */}
+            <PageWrapper>
+              <Chat />
+            </PageWrapper>
           </Route>
         </IonRouterOutlet>
-        <IonTabBar
-          slot="top"
-          // disable it for now
-          style={{ display: "none" }}
-        >
+        <IonTabBar slot="top" style={{ display: "none" }}>
           <IonTabButton tab="chat" href="/">
             <IonIcon aria-hidden="true" icon={triangle} />
             <IonLabel>Chat</IonLabel>
