@@ -1,0 +1,43 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: calc(100% - 56px - 56px); /* Adjust based on header and footer height */
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  max-width: 70%;
+}
+
+.message.user {
+  background-color: #d1f4ff;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background-color: #f0f0f0;
+  align-self: flex-start;
+}
+
+ion-footer {
+  --background: #ffffff;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+ion-toolbar {
+  --background: #3880ff;
+  color: white;
+}
+
+ion-title {
+  text-align: center;
+}
+
+ion-button {
+  --background: #3880ff;
+  color: white;
+}
