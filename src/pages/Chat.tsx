@@ -1,17 +1,12 @@
 import {
   IonButton,
-  IonButtons,
   IonContent,
   IonFooter,
-  IonHeader,
   IonInput,
   IonItem,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./Chat.css";
 
 const Chat: React.FC = () => {
@@ -21,11 +16,20 @@ const Chat: React.FC = () => {
   ]);
   const [newMessage, setNewMessage] = useState("");
 
-  const sendMessage = () => {
-    if (newMessage.trim() !== "") {
-      setMessages([...messages, { from: "user", text: newMessage }]);
-      setNewMessage("");
-    }
+  const sendMessage = useCallback(
+    ({ message }: { message: string }) => {
+      if (message.trim() !== "") {
+        setMessages([...messages, { from: "user", text: message }]);
+        setNewMessage("");
+      }
+    },
+    [messages, newMessage]
+  );
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const message = (event.currentTarget[0] as HTMLInputElement).value;
+    event.preventDefault();
+    sendMessage({ message });
   };
 
   return (
@@ -42,15 +46,20 @@ const Chat: React.FC = () => {
 
       <IonFooter>
         <IonToolbar>
-          <IonItem>
-            <IonInput
-              placeholder="Type a message..."
-              value={newMessage}
-              onIonChange={(e) => setNewMessage(e.detail.value!)}
-            ></IonInput>
-            <IonButton slot="end" onClick={sendMessage}>
-              Send
-            </IonButton>
+          <IonItem lines="none">
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: "flex", width: "100%" }}
+            >
+              <IonInput
+                placeholder="Type a message..."
+                value={newMessage}
+                style={{ flex: 1 }}
+              />
+              <IonButton type="submit" slot="end">
+                Send
+              </IonButton>
+            </form>
           </IonItem>
         </IonToolbar>
       </IonFooter>

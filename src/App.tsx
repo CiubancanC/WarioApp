@@ -55,6 +55,7 @@ import "@ionic/react/css/palettes/dark.system.css";
 /* Theme variables */
 import "./theme/variables.css";
 import PageWrapper from "./components/PageWrapper";
+import PageMenu from "./components/PageMenu";
 
 setupIonicReact();
 
@@ -80,18 +81,8 @@ const AppHeader: React.FC<{ title: string }> = ({ title }) => (
 
 const App: React.FC = () => (
   <IonApp>
-    <IonMenu side="start" contentId="main-content">
-      <IonContent>
-        <IonList>
-          <IonItemDivider>Menu</IonItemDivider>
-          <IonMenuToggle>
-            <IonButton>Item 1</IonButton>
-            <IonButton>Item 2</IonButton>
-          </IonMenuToggle>
-        </IonList>
-      </IonContent>
-    </IonMenu>
     <IonReactRouter>
+      <PageMenu />
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/">
