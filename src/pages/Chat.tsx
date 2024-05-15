@@ -12,7 +12,6 @@ import {
   generateMemeImage,
   generateMemeText,
 } from "../components/scripts/GenerateMeme";
-// import { invokeModel } from "../components/scripts/GenerateMeme";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState([
@@ -34,7 +33,7 @@ const Chat: React.FC = () => {
             console.error("Error generating meme text: ", error);
           }
           try {
-            const memeImage = await generateMemeImage(memeObj.text);
+            const memeImage = await generateMemeImage(message);
             memeObj.image = memeImage;
           } catch (error) {
             console.error("Error generating meme image: ", error);

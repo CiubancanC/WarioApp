@@ -12,8 +12,16 @@ const bedrockClient = new BedrockRuntimeClient({
 });
 
 export const generateMemeText = async (prompt: string) => {
+  const detailedPrompt = `
+  Create a highly engaging, charismatic, funny, extravagant, and slightly cringe meme text based on the following input: "${prompt}". 
+  Ensure the text is memorable, uses modern internet slang, and fits well with popular meme formats.
+  Your response should not contain more than 16 words and should be suitable for a wide audience.
+  Give your best shot at creating a meme that will make the internet go wild!
+  Give your response directly, your response must only contain the 16 words of meme tete that's all. No introduction or conclusion.  
+  `;
+
   const payload = {
-    inputText: prompt,
+    inputText: detailedPrompt,
     textGenerationConfig: {
       maxTokenCount: 4096,
       stopSequences: [],
@@ -41,10 +49,15 @@ export const generateMemeText = async (prompt: string) => {
 };
 
 export const generateMemeImage = async (text: string) => {
+  const detailedPrompt = `
+  You are a meme generator, tailored to extract the essence of humor and wit from the following text: "${text}".
+    Your task is to create a meme image that is both visually appealing and humorous, using the text as a reference.
+  `;
+
   const payload = {
     taskType: "TEXT_IMAGE",
     textToImageParams: {
-      text: text,
+      text: detailedPrompt,
     },
     imageGenerationConfig: {
       numberOfImages: 1,
