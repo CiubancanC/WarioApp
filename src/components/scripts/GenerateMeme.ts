@@ -50,9 +50,10 @@ export const generateMemeText = async (prompt: string) => {
 
 export const generateMemeImage = async (text: string) => {
   const detailedPrompt = `
-  You are a meme generator, tailored to extract the essence of humor and wit from the following text: "${text}".
-    Your task is to create a meme image that is both visually appealing and humorous, using the text as a reference.
-  `;
+    You are a meme generator, tailored to extract the essence of humor and wit from the following text: "${text}".
+      Your task is to create a meme image that is both visually appealing and humorous, using the text as a reference.
+      Make sure to include the text inside the generated image entirely and correctly.
+    `;
 
   const payload = {
     taskType: "TEXT_IMAGE",
@@ -62,8 +63,8 @@ export const generateMemeImage = async (text: string) => {
     imageGenerationConfig: {
       numberOfImages: 1,
       quality: "premium",
-      height: 768,
-      width: 1280,
+      height: 512,
+      width: 512,
       cfgScale: 7.5,
       seed: 42,
     },
